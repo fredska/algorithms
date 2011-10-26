@@ -1,7 +1,10 @@
 #include "cute.h"
 #include "ide_listener.h"
 #include "cute_runner.h"
-
+#include <vector>
+#include <iostream>
+#include <Graph.h>
+using namespace std;
 void thisIsATest() {
 	ASSERTM("start writing tests", false);	
 }
@@ -16,6 +19,9 @@ void runSuite(){
 
 int main(){
     runSuite();
+
+    Graph graph;
+    graph.setup();
     return 0;
 }
 
