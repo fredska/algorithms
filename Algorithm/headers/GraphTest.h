@@ -5,13 +5,14 @@
  *      Author: Work
  */
 
-#include <Graph.h>
 #ifndef GRAPHTEST_H_
 #define GRAPHTEST_H_
 
-struct GraphTest
+class GraphTest
 {
-	Graph graph;
+public:
+	GraphTest();
+	void runGraphTestSuite();
 };
 
 

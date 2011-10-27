@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <Graph.h>
+#include <BreadthFirstSearchTest.h>
 using namespace std;
 
 Graph bfsGraph(10);
@@ -35,21 +36,38 @@ void setupBreadthFirstSearchTest()
 
 void checkEdgeValuesValid()
 {
-	set<int> getEdges;
-
+	typedef set<int> EDGES;
+	EDGES getEdges;
 	getEdges = bfsGraph.verticies.at(0);
-	//ASSERT(getEdges.find(1) == 0);
-	//ASSERT(getEdges.find(2) == 1);
+	EDGES::iterator getEdgesIter;
+
+	getEdgesIter = getEdges.find(1);
+	ASSERT(getEdgesIter!=getEdges.end());
+
+	getEdges = bfsGraph.verticies.at(3);
+
+	getEdgesIter = getEdges.find(8);
+	ASSERT(getEdgesIter!=getEdges.end());
 }
 
-void runBFSSuite(){
+void shouldReturnShortestDistanceToVertex()
+{
+
+}
+
+
+
+void BreadthFirstSearchTest::runBFSSuite(){
 	cute::suite s;
 	//TODO add your test here
 	setupBreadthFirstSearchTest();
-	s.push_back(CUTE(setupBreadthFirstSearchTest));
+	s.push_back(CUTE(checkEdgeValuesValid));
 	cute::ide_listener lis;
-	cute::makeRunner(lis)(s, "The Suite");
+	cute::makeRunner(lis)(s, "BreadthFirstSearch Suite");
 }
 
-
+BreadthFirstSearchTest::BreadthFirstSearchTest()
+{
+	;
+}
 

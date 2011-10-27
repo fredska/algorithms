@@ -4,42 +4,31 @@
 #include <vector>
 #include <iostream>
 #include <Graph.h>
+#include <GraphTest.h>
+#include <BreadthFirstSearchTest.h>
 using namespace std;
-void thisIsATest() {
-	ASSERTM("start writing tests", false);	
+
+void thisisatest()
+{
+	ASSERT(false);
 }
 
-void runSuite(){
+void runSuite()
+{
+	GraphTest gt;
+
 	cute::suite s;
-	//TODO add your test here
-	s.push_back(CUTE(thisIsATest));
+	s.push_back(CUTE(thisisatest));
 	cute::ide_listener lis;
-	cute::makeRunner(lis)(s, "The Suite");
+	cute::makeRunner(lis)(s, "Graph Tests");
 }
 
 int main(){
-    runSuite();
-    /*
-    Graph graph(10);
-    graph.addEdge(Edge(0,1));
-    graph.addEdge(Edge(0,2));
-    graph.addEdge(Edge(0,3));
-    graph.addEdge(Edge(2,3));
-    graph.addEdge(Edge(4,3));
-    graph.addEdge(Edge(6,3));
+	GraphTest gt;
+	gt.runGraphTestSuite();
 
-    set<int> getVerts;
-    int vertexPos;
-    vertexPos = 4;
-    getVerts = graph.fetchAdjacencyList(vertexPos);
-
-    vector<set<int> >::iterator vertexIter;
-    set<int>::iterator setIter;
-    for(setIter=getVerts.begin();setIter!=getVerts.end();setIter++)
-    	{
-    		cout << vertexPos << "," << *setIter << endl;
-    	}
-    */
+	BreadthFirstSearchTest bfsTest;
+	bfsTest.runBFSSuite();
     return 0;
 }
 

@@ -7,11 +7,5 @@
 
 #ifndef NODESTATE_H_
 #define NODESTATE_H_
-
-struct NodeState
-{
-
-};
-
-
+enum NodeState_t {NEW, DISCOVERED, VISITED};
 #endif /* NODESTATE_H_ */

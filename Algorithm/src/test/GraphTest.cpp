@@ -10,9 +10,9 @@
 #include "cute_runner.h"
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 #include <Graph.h>
-
-
+#include <GraphTest.h>
 using namespace std;
 
 Graph graph(10);
@@ -20,28 +20,47 @@ Graph graph(10);
 void setupGraphTest()
 {
 	graph.addEdge(Edge(0,1));
+	graph.addEdge(Edge(0,2));
+	graph.addEdge(Edge(0,3));
 	graph.addEdge(Edge(5,3));
 	graph.addEdge(Edge(3,2));
 	graph.addEdge(Edge(0,1));
 }
 
-void testGraphEdgeValid()
+void truefalse(int x)
 {
-	set<int> getEdges;
-	set<int>::iterator getEdgesIter;
-	getEdges = graph.verticies.at(0);
-	getEdgesIter = getEdges.find(1);
-	ASSERT(*getEdgesIter==0);
+  cout << (x?"True":"False") << endl;
 }
 
-void runGraphTestSuite()
+void testGraphEdgeValid()
+{
+	typedef set<int> EDGES;
+	EDGES getEdges;
+	getEdges = graph.verticies.at(0);
+	EDGES::iterator getEdgesIter;
+
+	getEdgesIter = getEdges.find(1);
+	ASSERT(getEdgesIter!=getEdges.end());
+	getEdgesIter = getEdges.find(3);
+	ASSERT(getEdgesIter!=getEdges.end());
+
+	getEdges = graph.verticies.at(3);
+
+	getEdgesIter = getEdges.find(2);
+	ASSERT(getEdgesIter!=getEdges.end());
+}
+
+void GraphTest::runGraphTestSuite()
 {
 	cute::suite s;
-	//TODO add your test here
 	setupGraphTest();
 	s.push_back(CUTE(testGraphEdgeValid));
 	cute::ide_listener lis;
-	cute::makeRunner(lis)(s, "Graph Test Suite");
+	cute::makeRunner(lis)(s, "Graph Test");
+}
+
+GraphTest::GraphTest()
+{
 }
 
 
