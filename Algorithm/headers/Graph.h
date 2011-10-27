@@ -5,10 +5,8 @@
  *      Author: Work
  */
 
-#include <iostream>
-#include <stdio.h>
 #include <vector>
-#include <Location.h>
+#include <set>
 #include <Edge.h>
 using namespace std;
 #ifndef GRAPH_H_
@@ -18,15 +16,15 @@ struct Graph
 
 	bool digraph;
 	int numberOfVerticies;
-	vector<vector<Location> > adjacencyList;
-	Graph();
+	vector<set<int> > verticies;
 	Graph(int numOfVerts);
 	Graph(int numOfVerts, bool isDigraph);
 	~Graph();
 
-	void setup();
+	void init(int numOfVerticies, bool isDigraph);
 	void addEdge(Edge edge);
 	void reset();
+	set<int> fetchAdjacencyList(int vertexPos);
 
 };
 

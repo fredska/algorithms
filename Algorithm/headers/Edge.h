@@ -13,10 +13,10 @@
 struct Edge
 {
 public:
-	Location to;
-	Location from;
+	int to;
+	int from;
 
-	Edge(Location input_to, Location input_from)
+	Edge(int input_to, int input_from)
 	{
 		to = input_to;
 		from = input_from;

@@ -21,9 +21,5 @@ struct Location
         row = r;
         col = c;
     };
-    bool operator==(Location& loc)
-		{
-    		return ((loc.col==col) && (loc.row==row));
-    	}
 };
 #endif //LOCATION_H_

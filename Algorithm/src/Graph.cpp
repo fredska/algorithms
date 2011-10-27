@@ -7,23 +7,22 @@
 
 #include "Graph.h"
 #include "Edge.h"
+#include <iostream>
+#include <stdio.h>
 using namespace std;
-
-Graph::Graph(){
-	this->numberOfVerticies = 0;
-	this->digraph = 0;
-}
 
 Graph::Graph(int numOfVerts)
 {
 	this->numberOfVerticies = numOfVerts;
 	this->digraph = 0;
+	init(this->numberOfVerticies, this->digraph);
 }
 
 Graph::Graph(int numOfVerts, bool isDigraph)
 {
 	this->numberOfVerticies = numOfVerts;
 	this->digraph = isDigraph;
+	init(this->numberOfVerticies, this->digraph);
 }
 
 Graph::~Graph()
@@ -31,47 +30,34 @@ Graph::~Graph()
 	;
 }
 
-void Graph::setup()
+void Graph::init(int numOfVerticies, bool isDiGraph)
 {
-	//Create the array
-//	vector<vector<Location> > awesome2DMatrix(25,vector<Location>(2));
-//	adjacencyList = awesome2DMatrix;
-	addEdge(Edge(Location(1,1),Location(3,3)));
-	addEdge(Edge(Location(1,6),Location(4,3)));
-	addEdge(Edge(Location(1,10),Location(5,3)));
-	addEdge(Edge(Location(1,1),Location(51,32)));
-	addEdge(Edge(Location(1,6),Location(921,74)));
-
-	vector<vector<Location> >::iterator iter_ii;
-	vector<Location>::iterator iter_jj;
-
-	for(iter_ii=adjacencyList.begin(); iter_ii!=adjacencyList.end();iter_ii++)
-	{
-		for(iter_jj=(*iter_ii).begin();iter_jj!=(*iter_ii).end();iter_jj++)
-		{
-			int row = iter_jj->row;
-			int col = iter_jj->col;
-			cout << row << "," << col << endl;
-		}
-	}
+	this->verticies.resize(numOfVerticies);
 }
 
 void Graph::addEdge(Edge edge)
 {
-	vector<vector<Location> >::iterator iter_ii;
-	if(adjacencyList.empty())
+	if(edge.to > this->numberOfVerticies || edge.from > this->numberOfVerticies)
 	{
-		vector<Location> newLoc; newLoc.push_back(edge.to);
-		adjacencyList.push_back(newLoc);
+		printf("The Edges exceed the boundary!");
 		return;
 	}
-	for(iter_ii=adjacencyList.begin(); iter_ii!=adjacencyList.end();iter_ii++)
+
+	if(edge.to == edge.from)
 	{
-		vector<Location> checkLoc = *iter_ii;
-		Location checkThisLoc = checkLoc.at(0);
-		if(checkThisLoc==edge.to)
-		{
-			printf("I Found my location!");
-		}
+		printf("This is just a point!");
+		return;
 	}
+
+	this->verticies[edge.to].insert(edge.from);
+}
+
+set<int> Graph::fetchAdjacencyList(int vertexPos)
+{
+	set<int> result;
+	if(vertexPos > this->numberOfVerticies) return result;
+
+	vector<set<int> >::iterator vertexIter;
+	int count = 0;
+	return this->verticies.at(vertexPos);
 }
