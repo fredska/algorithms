@@ -38,11 +38,21 @@ void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int sou
 	while(!q.empty())
 	{
 		int searchNumber = q.front();
+		cout << "Viewing Node: " << (searchNumber+1) << endl;
+		nodeState[searchNumber] = VISITED;
 		q.pop();
 
-		set<int> getEdges = graph.verticies.at(source);
+		set<int> getEdges = graph.verticies.at(searchNumber);
 		set<int>::iterator getEdgesIter;
-		getEdgesIter = getEdges.find(source);
+
+		for(getEdgesIter=getEdges.begin(); getEdgesIter!=getEdges.end();getEdgesIter++)
+		{
+			if(nodeState[*getEdgesIter]!=VISITED)
+			{
+				nodeState[*getEdgesIter] = DISCOVERED;
+				q.push(*getEdgesIter);
+			}
+		}
 
 
 	}
