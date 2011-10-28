@@ -9,6 +9,9 @@
 #ifndef BREADTHFIRSTSEARCHTEST_H_
 #define BREADTHFIRSTSEARCHTEST_H_
 
+#define WIDTH 5
+#define HEIGHT 5
+
 struct BreadthFirstSearchTest
 {
 private:

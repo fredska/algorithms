@@ -6,7 +6,6 @@
  */
 
 #include "Graph.h"
-#include "Edge.h"
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -35,29 +34,21 @@ void Graph::init(int numOfVerticies, bool isDiGraph)
 	this->verticies.resize(numOfVerticies);
 }
 
-void Graph::addEdge(Edge edge)
+void Graph::addEdge(int parent, int child)
 {
-	if(edge.to > this->numberOfVerticies || edge.from > this->numberOfVerticies)
+	if(parent > this->numberOfVerticies || child > this->numberOfVerticies)
 	{
 		printf("The Edges exceed the boundary!");
 		return;
 	}
 
-	if(edge.to == edge.from)
+	if(parent == child)
 	{
 		printf("This is just a point!");
 		return;
 	}
 
-	this->verticies[edge.to].insert(edge.from);
-}
-
-set<int> Graph::fetchAdjacencyList(int vertexPos)
-{
-	set<int> result;
-	if(vertexPos > this->numberOfVerticies) return result;
-
-	vector<set<int> >::iterator vertexIter;
-	int count = 0;
-	return this->verticies.at(vertexPos);
+	this->verticies[parent].insert(child);
+	if(this->digraph)
+		this->verticies[child].insert(parent);
 }

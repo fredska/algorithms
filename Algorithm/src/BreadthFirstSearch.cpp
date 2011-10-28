@@ -32,23 +32,26 @@ void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int sou
 	 */
 
 	q.push(source);
-	nodeState = new NodeState_t[graph.numberOfVerticies];
-	nodeState[source] = VISITED;
 
+	nodeState = new NodeState_t[graph.numberOfVerticies];
+	parent = new int[graph.numberOfVerticies];
+	parent[source] = -1;
 	while(!q.empty())
 	{
-		int searchNumber = q.front();
-		cout << "Viewing Node: " << (searchNumber+1) << endl;
-		nodeState[searchNumber] = VISITED;
+		int vertex = q.front();
+		if(nodeState[vertex]!=VISITED)
+		cout << "Viewing Node: " << (vertex+1) << endl;
+		nodeState[vertex] = VISITED;
 		q.pop();
 
-		set<int> getEdges = graph.verticies.at(searchNumber);
+		set<int> getEdges = graph.verticies.at(vertex);
 		set<int>::iterator getEdgesIter;
 
 		for(getEdgesIter=getEdges.begin(); getEdgesIter!=getEdges.end();getEdgesIter++)
 		{
 			if(nodeState[*getEdgesIter]!=VISITED)
 			{
+				parent[*getEdgesIter] = vertex;
 				nodeState[*getEdgesIter] = DISCOVERED;
 				q.push(*getEdgesIter);
 			}
@@ -58,4 +61,24 @@ void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int sou
 	}
 }
 
+void BreadthFirstSearch::findShortestPathUsingBFS(int dest)
+{
+	/*
+	 * From the Java Implementation of S.Lee
+	 * https://github.com/sglee77/algorithm/blob/master/java/src/main/java/search/BreadthFirstSearch.java
+	 *
+	 * public void populateShortestPathToVertex(int vertex,StringBuffer result) {
+		if(vertex >= graph.getNumberOfVertices()) { throw new IllegalArgumentException("Invalid vertex"); }
+
+		if(vertex == source) {
+			result.append(source);
+		} else if(parent[vertex] == -1) {
+			throw new RuntimeException("No path from " + source + " to " + vertex + " exist");
+		} else {
+			populateShortestPathToVertex(parent[vertex], result);
+			result.append(vertex);
+		}
+	}
+	 */
+}
 

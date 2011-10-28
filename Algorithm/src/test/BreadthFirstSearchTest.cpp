@@ -14,40 +14,101 @@
 #include <BreadthFirstSearchTest.h>
 using namespace std;
 
-Graph bfsGraph(10);
+Graph bfsGraph(WIDTH * HEIGHT);
+
+/**
+ * Use a queue structure to generate the edges
+ * the edges will be immediately Above, Below, Left and Right of the source point
+ * so.. (d is for pointing down)
+ * 1 <- 2 -> 3
+ * ^    ^    ^
+ * 4 <- 5 -> 6
+ * d    d    d
+ * 7 <- 8 -> 9
+ */
+void generateGraphFromSource(int source)
+{
+	queue<int> q;
+	q.push(source);
+	int MAX_SIZE;
+	MAX_SIZE = WIDTH * HEIGHT;
+	bool *nodeState = new bool[MAX_SIZE]; // For Visited Nodes;
+	for(int i = 0;i<MAX_SIZE;i++)
+		nodeState[i] = 0;
+	while(!q.empty())
+	{
+		int vertex = q.front();
+		q.pop();
+
+		if(vertex < 0 || vertex >= (MAX_SIZE) || nodeState[vertex])
+		{
+			continue;
+		}
+		nodeState[vertex] = true;
+		int above, below, left, right;
+		above = vertex + WIDTH;
+		below = vertex - WIDTH;
+		left  = vertex - 1;
+		right = vertex + 1;
+
+		if(vertex > (WIDTH))
+		{
+			bfsGraph.addEdge(vertex, below);
+			q.push(below);
+		}
+		if(vertex <= (MAX_SIZE - WIDTH))
+		{
+			bfsGraph.addEdge(vertex, above);
+			q.push(above);
+		}
+		if((vertex % WIDTH) != 1)
+		{
+			bfsGraph.addEdge(vertex, left);
+			q.push(left);
+		}
+		if((vertex % WIDTH) != 0)
+		{
+			bfsGraph.addEdge(vertex, right);
+			q.push(right);
+		}
+	}
+}
 
 void setupBreadthFirstSearchTest()
 {
-	bfsGraph.addEdge(Edge(0,1));
-	bfsGraph.addEdge(Edge(0,2));
-	bfsGraph.addEdge(Edge(1,5));
-	bfsGraph.addEdge(Edge(1,6));
-	bfsGraph.addEdge(Edge(2,3));
-	bfsGraph.addEdge(Edge(2,4));
-	bfsGraph.addEdge(Edge(2,5));
-	bfsGraph.addEdge(Edge(3,0));
-	bfsGraph.addEdge(Edge(3,8));
-	bfsGraph.addEdge(Edge(3,4));
-	bfsGraph.addEdge(Edge(4,9));
-	bfsGraph.addEdge(Edge(6,7));
-	bfsGraph.addEdge(Edge(7,2));
-	bfsGraph.addEdge(Edge(7,9));
+	generateGraphFromSource(13);
 }
+
+
 
 void checkEdgeValuesValid()
 {
 	typedef set<int> EDGES;
 	EDGES getEdges;
-	getEdges = bfsGraph.verticies.at(0);
+	getEdges = bfsGraph.verticies.at(13);
 	EDGES::iterator getEdgesIter;
 
-	getEdgesIter = getEdges.find(1);
+	std::cout << "Checking the node paths: " << endl;
+	for(getEdgesIter=getEdges.begin(); getEdgesIter!=getEdges.end();getEdgesIter++)
+	{
+		std::cout << "13," << *getEdgesIter << endl;
+	}
+	getEdgesIter = getEdges.find(12);
 	ASSERT(getEdgesIter!=getEdges.end());
 
-	getEdges = bfsGraph.verticies.at(3);
+	//Check edges 17,22 & 17,16
+	getEdges = bfsGraph.verticies.at(17);
 
-	getEdgesIter = getEdges.find(8);
+	std::cout << "Checking the node paths: " << endl;
+	for(getEdgesIter=getEdges.begin(); getEdgesIter!=getEdges.end();getEdgesIter++)
+	{
+		std::cout << "13," << *getEdgesIter << endl;
+	}
+	getEdgesIter = getEdges.find(16);
 	ASSERT(getEdgesIter!=getEdges.end());
+
+	getEdgesIter = getEdges.find(22);
+		ASSERT(getEdgesIter!=getEdges.end());
 }
 
 void shouldReturnShortestDistanceToVertex()

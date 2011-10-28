@@ -28,20 +28,20 @@ Graph generateGraph()
 {
 	Graph result(10,false);
 
-	result.addEdge(Edge(0,1));
-	result.addEdge(Edge(0,2));
-	result.addEdge(Edge(1,5));
-	result.addEdge(Edge(1,6));
-	result.addEdge(Edge(2,3));
-	result.addEdge(Edge(2,4));
-	result.addEdge(Edge(2,5));
-	result.addEdge(Edge(3,0));
-	result.addEdge(Edge(3,8));
-	result.addEdge(Edge(3,4));
-	result.addEdge(Edge(4,9));
-	result.addEdge(Edge(6,7));
-	result.addEdge(Edge(7,2));
-	result.addEdge(Edge(7,9));
+	result.addEdge(0,1);
+	result.addEdge(0,2);
+	result.addEdge(1,5);
+	result.addEdge(1,6);
+	result.addEdge(2,3);
+	result.addEdge(2,4);
+	result.addEdge(2,5);
+	result.addEdge(3,0);
+	result.addEdge(3,8);
+	result.addEdge(3,4);
+	result.addEdge(4,9);
+	result.addEdge(6,7);
+	result.addEdge(7,2);
+	result.addEdge(7,9);
 
 	return result;
 }

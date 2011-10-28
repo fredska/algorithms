@@ -19,12 +19,12 @@ Graph graph(10);
 
 void setupGraphTest()
 {
-	graph.addEdge(Edge(0,1));
-	graph.addEdge(Edge(0,2));
-	graph.addEdge(Edge(0,3));
-	graph.addEdge(Edge(5,3));
-	graph.addEdge(Edge(3,2));
-	graph.addEdge(Edge(0,1));
+	graph.addEdge(0,1);
+	graph.addEdge(0,2);
+	graph.addEdge(0,3);
+	graph.addEdge(5,3);
+	graph.addEdge(3,2);
+	graph.addEdge(0,1);
 }
 
 void truefalse(int x)

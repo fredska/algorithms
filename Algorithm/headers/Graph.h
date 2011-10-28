@@ -22,10 +22,7 @@ struct Graph
 	~Graph();
 
 	void init(int numOfVerticies, bool isDigraph);
-	void addEdge(Edge edge);
-	void reset();
-	set<int> fetchAdjacencyList(int vertexPos);
-
+	void addEdge(int parent, int child);
 };
 
 #endif /* GRAPH_H_ */

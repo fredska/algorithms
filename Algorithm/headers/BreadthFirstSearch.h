@@ -17,13 +17,14 @@ struct BreadthFirstSearch
 private:
 	int minimumDistance;
 	NodeState_t *nodeState;
+	int *parent;
 	queue<int> q;
 public:
 	BreadthFirstSearch();
 	~BreadthFirstSearch();
 	void searchGraphUsingBreadthFirstSearch(Graph graph, int source);
-	void findShortestPathUsingBFS(Graph graph, int source, int dest);
-
+	void findShortestPathUsingBFS(int dest);
+	void findNextStepForShortestPath(int dest);
 };
 
 
