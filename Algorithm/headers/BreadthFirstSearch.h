@@ -18,6 +18,7 @@ private:
 	int minimumDistance;
 	NodeState_t *nodeState;
 	int *parent;
+	int *distance;
 	queue<int> q;
 public:
 	BreadthFirstSearch();
@@ -25,6 +26,7 @@ public:
 	void searchGraphUsingBreadthFirstSearch(Graph graph, int source);
 	void findShortestPathUsingBFS(int dest);
 	void findNextStepForShortestPath(int dest);
+	int distanceToDestination(int dest);
 };
 
 

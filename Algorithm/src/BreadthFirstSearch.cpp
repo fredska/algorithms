@@ -35,7 +35,9 @@ void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int sou
 
 	nodeState = new NodeState_t[graph.numberOfVerticies];
 	parent = new int[graph.numberOfVerticies];
+	distance = new int[graph.numberOfVerticies];
 	parent[source] = -1;
+	distance[source] = 0;
 	while(!q.empty())
 	{
 		int vertex = q.front();
@@ -52,6 +54,7 @@ void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int sou
 			if(nodeState[*getEdgesIter]!=VISITED)
 			{
 				parent[*getEdgesIter] = vertex;
+				distance[*getEdgesIter] = distance[vertex] + 1;
 				nodeState[*getEdgesIter] = DISCOVERED;
 				q.push(*getEdgesIter);
 			}
@@ -80,5 +83,15 @@ void BreadthFirstSearch::findShortestPathUsingBFS(int dest)
 		}
 	}
 	 */
+
+}
+
+int BreadthFirstSearch::distanceToDestination(int dest)
+{
+	int arraySize = sizeof(parent) / sizeof(int);
+	if(dest >= arraySize)
+		return -1; // ERROR!
+
+	return parent[dest];
 }
 

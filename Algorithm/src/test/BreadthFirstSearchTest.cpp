@@ -26,7 +26,13 @@ Graph bfsGraph(WIDTH * HEIGHT);
  * d    d    d
  * 7 <- 8 -> 9
  */
-void generateGraphFromSource(int source)
+
+bool verifyValidLocation(int vertex, int MAX_SIZE)
+{
+	return (vertex < 0 || vertex >= (MAX_SIZE));
+}
+
+Graph generateGraphFromSource(Graph graph, int source)
 {
 	queue<int> q;
 	q.push(source);
@@ -40,7 +46,7 @@ void generateGraphFromSource(int source)
 		int vertex = q.front();
 		q.pop();
 
-		if(vertex < 0 || vertex >= (MAX_SIZE) || nodeState[vertex])
+		if(verifyValidLocation(vertex,MAX_SIZE) || nodeState[vertex])
 		{
 			continue;
 		}
@@ -51,32 +57,34 @@ void generateGraphFromSource(int source)
 		left  = vertex - 1;
 		right = vertex + 1;
 
-		if(vertex > (WIDTH))
+		if((vertex >= (WIDTH) && !nodeState[below]) && !verifyValidLocation(below, MAX_SIZE))
 		{
-			bfsGraph.addEdge(vertex, below);
+			graph.addEdge(vertex, below);
 			q.push(below);
 		}
-		if(vertex <= (MAX_SIZE - WIDTH))
+		if((vertex <= (MAX_SIZE - WIDTH) && !nodeState[above]) && !verifyValidLocation(above, MAX_SIZE))
 		{
-			bfsGraph.addEdge(vertex, above);
+			graph.addEdge(vertex, above);
 			q.push(above);
 		}
-		if((vertex % WIDTH) != 1)
+		if(((vertex % WIDTH) != 0 && !nodeState[left]) && !verifyValidLocation(left, MAX_SIZE))
 		{
-			bfsGraph.addEdge(vertex, left);
+			graph.addEdge(vertex, left);
 			q.push(left);
 		}
-		if((vertex % WIDTH) != 0)
+		if(((vertex % WIDTH) != (WIDTH-1) && !nodeState[right]) && !verifyValidLocation(right, MAX_SIZE))
 		{
-			bfsGraph.addEdge(vertex, right);
+			graph.addEdge(vertex, right);
 			q.push(right);
 		}
 	}
+
+	return graph;
 }
 
 void setupBreadthFirstSearchTest()
 {
-	generateGraphFromSource(13);
+	bfsGraph = generateGraphFromSource(bfsGraph, 4);
 }
 
 
@@ -102,20 +110,19 @@ void checkEdgeValuesValid()
 	std::cout << "Checking the node paths: " << endl;
 	for(getEdgesIter=getEdges.begin(); getEdgesIter!=getEdges.end();getEdgesIter++)
 	{
-		std::cout << "13," << *getEdgesIter << endl;
+		std::cout << "17," << *getEdgesIter << endl;
 	}
 	getEdgesIter = getEdges.find(16);
 	ASSERT(getEdgesIter!=getEdges.end());
-
-	getEdgesIter = getEdges.find(22);
-		ASSERT(getEdgesIter!=getEdges.end());
 }
 
-void shouldReturnShortestDistanceToVertex()
+void validateDistanceToDestinationFromSource(int source, int dest, int gridWidth, int gridHeight)
 {
+	Graph thisGraph(gridWidth * gridHeight);
+	thisGraph = generateGraphFromSource(thisGraph, source);
+
 
 }
-
 
 
 void BreadthFirstSearchTest::runBFSSuite(){
