@@ -10,6 +10,12 @@
 #include <stdio.h>
 using namespace std;
 
+Graph::Graph()
+{
+	this->numberOfVerticies = 10;
+	this->digraph = 0;
+	init(this->numberOfVerticies, this->digraph);
+}
 Graph::Graph(int numOfVerts)
 {
 	this->numberOfVerticies = numOfVerts;

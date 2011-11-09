@@ -5,6 +5,8 @@
  *      Author: Work
  */
 #include <BreadthFirstSearch.h>
+#include <vector>
+using namespace std;
 BreadthFirstSearch::BreadthFirstSearch()
 {
 	;
@@ -17,6 +19,7 @@ BreadthFirstSearch::~BreadthFirstSearch()
 
 void BreadthFirstSearch::searchGraphUsingBreadthFirstSearch(Graph graph, int source)
 {
+
 	/*
 	 * 1  procedure BFS(Graph,source):
 2      create a queue Q

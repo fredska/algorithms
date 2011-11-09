@@ -9,6 +9,7 @@
 #include "ide_listener.h"
 #include "cute_runner.h"
 #include <vector>
+#include <set>
 #include <iostream>
 #include <Graph.h>
 #include <BreadthFirstSearchTest.h>
@@ -29,6 +30,7 @@ Graph bfsGraph(WIDTH * HEIGHT);
 
 bool verifyValidLocation(int vertex, int MAX_SIZE)
 {
+	set<int> i;
 	return (vertex < 0 || vertex >= (MAX_SIZE));
 }
 

@@ -17,6 +17,7 @@ struct Graph
 	bool digraph;
 	int numberOfVerticies;
 	vector<set<int> > verticies;
+	Graph();
 	Graph(int numOfVerts);
 	Graph(int numOfVerts, bool isDigraph);
 	~Graph();
